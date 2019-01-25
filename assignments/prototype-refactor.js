@@ -7,19 +7,10 @@ Prototype Refactor
 2. Your goal is to refactor all of this code to use ES6 Classes. The console.log() statements should still return what is expected of them.
 
 */
-
-// function GameObject(attr) {
-//     this.createdAt = attr.createdAt;
-//     this.dimensions = attr.dimensions;
-// }
-
-// GameObject.prototype.destroy = function(){
-//     return `${this.name} was removed from the game.`;
-// }
 class GameObject {
-    constructor(createdAt, dimensions){
-        this.createdAt = createdAt;
-        this.dimensions = dimensions;
+    constructor(attr){
+        this.createdAt = attr.createdAt;
+        this.dimensions = attr.dimensions;
     }
 
     destroy() {
@@ -27,21 +18,11 @@ class GameObject {
     }
 }
 
-
-// function CharacterStats(attr) {
-//     GameObject.call(this, attr);
-//     this.healthPoints = attr.healthPoints;
-//     this.name = attr.name;
-// }
-
-// CharacterStats.prototype = Object.create(GameObject.prototype);
-// CharacterStats.prototype.takeDamage = function(){
-//     return `${this.name} took damage.`;
-// }
 class CharacterStats extends GameObject {
-    constructor(healthPoints, name){
-        this.healthPoints = healthPoints;
-        this.name = name;
+    constructor(attr){
+        super(attr);
+        this.healthPoints = attr.healthPoints;
+        this.name = attr.name;
     }
 
     takeDamage() {
@@ -49,23 +30,12 @@ class CharacterStats extends GameObject {
     }
 }
 
-// function Humanoid(attr) {
-//     CharacterStats.call(this, attr);
-//     this.team = attr.team;
-//     this.weapons = attr.weapons;
-//     this.language = attr.language;
-// }
-
-// Humanoid.prototype = Object.create(CharacterStats.prototype);
-// Humanoid.prototype.greet = function (){
-//     return `${this.name} offers a greeting in ${this.language}.`
-// }
-
-class Humanoid extends CharacterStats {
-    constructor(team, weapons, language){
-        this.team = team;
-        this.weapons = weapons;
-        this.language = language;
+class Humanoid extends CharacterStats{
+    constructor(attr){
+        super(attr);
+        this.team = attr.team;
+        this.weapons = attr.weapons;
+        this.language = attr.language;
     }
 
     greet(){
